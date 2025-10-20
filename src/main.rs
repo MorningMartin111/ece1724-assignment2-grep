@@ -231,7 +231,7 @@ fn find_matches_in_line(line_text: &str, search_pattern: &str, ignore_case: bool
         let current_slice = &text_bytes[current_position..current_position + pattern_length];
 
         if current_slice == pattern_bytes {
-            // Found a match! Record the start and end positions
+            // Find a match! Record the start and end positions
             let match_start = current_position;
             let match_end = current_position + pattern_length;
             match_positions.push((match_start, match_end));
@@ -252,7 +252,6 @@ fn colorize_hits(original_line: &str, match_ranges: &[(usize, usize)]) -> String
     }
 
     // Create a new string to build the colored result
-    // Pre-allocate enough space for efficiency
     let mut colored_result = String::with_capacity(original_line.len() + match_ranges.len() * 10);
     let mut last_processed_position = 0;
 
@@ -279,7 +278,6 @@ fn colorize_hits(original_line: &str, match_ranges: &[(usize, usize)]) -> String
 }
 
 
-// ===== Main function: Coordinate the entire program =====
 fn main() {
     let config = match parse_arguments() {
         Ok(config) => config,
